@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        lv = (ListView) this.findViewById(R.id.lv1);
         tvresults = (TextView) findViewById(R.id.tvResults);
         btngettasks = (Button) findViewById(R.id.buttonGetTasks);
         btngettasks.setOnClickListener(new View.OnClickListener() {
@@ -49,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
 
                 // Insert a task
                 ArrayList<String> data = db.getTaskContent();
-                ArrayList<Task>
-
                 db.close();
 
                 String txt = "";
@@ -60,13 +59,13 @@ public class MainActivity extends AppCompatActivity {
                 }
                 tvresults.setText(txt);
 
+                //CUSTOM LIST VIEW
+                DBHelper db2=new DBHelper(MainActivity.this);
+                tasksss=db2.getTasks();
+                db2.close();
+                aa = new TaskAdapter(MainActivity.this,R.layout.row,tasksss);
+                lv.setAdapter(aa);
             }
         });
-
-        lv = (ListView) this.findViewById(R.id.lv1);
-        tasksss = new ArrayList<Task>();
-        aa = new TaskAdapter(this,R.layout.row,tasksss);
-        lv.setAdapter(aa);
-
     }
 }
